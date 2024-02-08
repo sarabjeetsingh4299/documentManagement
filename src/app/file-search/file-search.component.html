@@ -1,0 +1,43 @@
+<!-- Assuming you have dropdowns for Major Head and Minor Head -->
+<div>
+    <label for="majorHead">Major Head:</label>
+    <select id="majorHead" [(ngModel)]="selectedMajorHead">
+      <!-- Add options dynamically based on your data -->
+      <option *ngFor="let majorHead of majorHeads" [value]="majorHead">{{ majorHead }}</option>
+    </select>
+  </div>
+  
+  <div>
+    <label for="minorHead">Minor Head:</label>
+    <select id="minorHead" [(ngModel)]="selectedMinorHead">
+      <!-- Add options dynamically based on your data -->
+      <option *ngFor="let minorHead of minorHeads" [value]="minorHead">{{ minorHead }}</option>
+    </select>
+  </div>
+  
+  <!-- Search bar for tags -->
+  <div>
+    <label for="tagSearch">Search by Tags:</label>
+    <input type="text" id="tagSearch" [(ngModel)]="searchQuery">
+  </div>
+  
+  <!-- Button to trigger the search -->
+  <button (click)="searchFiles()">Search</button>
+  
+  <!-- Display search results -->
+  <table class="table table-striped">
+    <tr>
+        <th>Department</th>
+        <th>Type</th>
+        <th>email</th>
+        <th>file</th>
+    </tr>
+      <tr  *ngFor="let data of filteredData">
+        <td>{{data.majorHead}}</td>
+        <td>{{data.minorHead}}</td>
+        <td>{{data.tags}}</td>
+        <td><a (click)="ddownloadFile(data.file[0])">{{data.file[0].name}}</a></td>
+      </tr>
+</table>
+
+  

@@ -1,0 +1,19 @@
+.logo{
+    background: #ff5f31;
+    border-radius: 50px;
+    padding: 5px;
+}
+.user-form-div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.admin-div{
+    color: coral;
+    text-align: right;
+    font-weight: 600;
+    border-bottom: 2px solid;
+}
+.register-btn {
+    transform: translate(0px, 33px);
+}
