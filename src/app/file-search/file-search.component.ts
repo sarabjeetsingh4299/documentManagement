@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 interface UploadedData {
   majorHead: string;
@@ -26,7 +27,7 @@ export class FileSearchComponent  implements OnInit{
   searchQuery: string = ''; 
 
 
-  constructor() {     }
+  constructor(private service:UserService) {     }
 
   ngOnInit(): void {
     const storedData = localStorage.getItem('fileMetadata');
@@ -58,20 +59,9 @@ export class FileSearchComponent  implements OnInit{
   
   ddownloadFile(fileObj: any) {
     if (fileObj) {
-      const blob = new Blob([fileObj.content], { type: fileObj.type });
-  
-      const url = URL.createObjectURL(blob);
-  
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileObj.name; 
-      document.body.appendChild(a);
-  
-      a.click();
-  
-      // Clean up by revoking the URL object
-      URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+      this.service.downloadFile().subscribe((res)=>{
+        console.log("data",res);
+      })
     } else {
       console.error('File object is null or undefined.');
     }

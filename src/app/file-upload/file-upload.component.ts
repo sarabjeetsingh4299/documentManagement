@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import {  FileMeta, uploadedData } from '../logindetail';
+import {  FileMeta, UsersDetails, uploadedData } from '../logindetail';
 
 @Component({
   selector: 'app-file-upload',
@@ -38,7 +38,11 @@ export class FileUploadComponent {
 
   setMinorHeadOptions() {
     if (this.selectedMajorHead === 'personal') {
-      this.minorHeadOptions = ['User 1', 'User 2', 'User 3'];
+      const userListString = localStorage.getItem('userList');
+      if (userListString) {
+        const userList: UsersDetails[] = JSON.parse(userListString);
+        this.minorHeadOptions = userList.map(user => user.username);
+      }
     } else if (this.selectedMajorHead === 'professional') {
       this.minorHeadOptions = ['Department 1', 'Department 2', 'Department 3'];
     }
@@ -59,13 +63,13 @@ export class FileUploadComponent {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     const reader = new FileReader();
-  
+    
     reader.onload = (event) => {
       const content:string | ArrayBuffer | null = event.target?.result as string | ArrayBuffer | null;
       if (content !== null) {
         let blobContent: Blob | null = null;
         if (typeof content === 'string') {
-          blobContent = new Blob([content], { type: file.type });
+          blobContent = new Blob([content], { type: 'application/pdf' });
         } else {
           blobContent = new Blob([new Uint8Array(content)], { type: file.type });
         }
