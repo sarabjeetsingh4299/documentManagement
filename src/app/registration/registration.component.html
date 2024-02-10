@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand logo" href="#">f/m</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto"> <!-- Align items to the right -->
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/register" routerLinkActive="active">Register User</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="">Logout</a>
+      </li>
+    </ul>
+  </div>
+  <div class=" admin-div"> <!-- Align to the right -->
+    <label class="text-light">Welcome Admin</label> <!-- Adjust text color -->
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h3 class="mb-0">Register User</h3> <!-- Add margin bottom -->
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="registerUser(registrationForm)" class="user-form-div" #registrationForm="ngForm">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username" [(ngModel)]="userdetails.username" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password" [(ngModel)]="userdetails.password" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" [(ngModel)]="userdetails.email" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="role">Role:</label>
+              <select name="role" id="role" [(ngModel)]="userdetails.role" class="form-control" required>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+            <div class="text-center register-btn"> <!-- Center the button -->
+              <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h2>User List</h2>
+  <table class="table table-striped">
+    <thead class="bg-primary text-white"> <!-- Blue header with white text -->
+      <tr>
+        
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userList">
+        
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td><button  class="btn btn-danger" (click)="deleteUser(user.username)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
