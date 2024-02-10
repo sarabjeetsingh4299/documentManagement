@@ -21,13 +21,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userList = [
-      { username: 'user', password: 'pass@user', email: 'user@ss.com', role: 'user' },
-      { username: 'sarab', password: 'sarab@1', email: 'sarabjeetsinghdigwa@gmail.com', role: 'admin' }
-    ];
+    const userListString = localStorage.getItem('userList');
 
-    localStorage.setItem('userList', JSON.stringify(userList));
+if (!userListString) {
+  // userList does not exist, set default admin user
+  const defaultUserList = [
+    { username: 'user', password: 'pass@user', email: 'user@ss.com', role: 'user' },
+    { username: 'sarab', password: 'sarab@1', email: 'sarabjeetsinghdigwa@gmail.com', role: 'admin' }
+  ];
   
+  localStorage.setItem('userList', JSON.stringify(defaultUserList));
+}
   }
 
   login(loginForm: NgForm) {

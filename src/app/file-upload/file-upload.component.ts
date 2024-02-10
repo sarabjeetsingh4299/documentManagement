@@ -39,9 +39,7 @@ export class FileUploadComponent {
     this.getUsers();
   }
 
-  seePreivew(){
-    
-  }
+ 
 
   getUsers() {
     const storedUserList = localStorage.getItem('userList');
@@ -72,25 +70,7 @@ export class FileUploadComponent {
   removeTag(tag: string) {
     this.tags = this.tags.filter(t => t !== tag);
   }
-  // const reader = new FileReader();
-
-  // reader.onload = (event) => {
-  //   const content:string | ArrayBuffer | null = event.target?.result as string | ArrayBuffer | null;
-  //   if (content !== null) {
-  //     let blobContent: Blob | null = null;
-  //     if (typeof content === 'string') {
-  //       blobContent = new Blob([content], { type: file.type });
-  //     } else {
-  //       blobContent = new Blob([new Uint8Array(content)], { type: file.type });
-  //     }
-
-     
-
-  //   }
-  // };
-
-  // reader.readAsArrayBuffer(file);
-
+  
   onFileSelected(event: any) {
      const file: File = event.target.files[0];
     const reader = new FileReader();
@@ -110,26 +90,13 @@ export class FileUploadComponent {
   }
 
   uploadFile(event:Event) {
+    
     event.preventDefault();
-    if (!this.selectedFile) {
-      console.error('No file selected.');
+    if (this.selectedFile.type === '') {
+      alert('No file selected.');
       return;
     }
-  //  const upload = localStorage.getItem("filedata");
-  //  if (upload && upload.includes('data:application/pdf')) {
-  //   // Display the PDF preview
-  //   const newWindow = window.open('', '_blank');
-  //   if (newWindow) {
-  //     // Write the PDF content to the new window
-  //     newWindow.document.write(`<iframe width="100%" height="100%" src="${upload}"></iframe>`);
-  //   } else {
-  //     console.error('Failed to open new window.');
-  //   }
-  // } else {
-  //   console.error('No or invalid PDF file selected.');
-  //   return;
-  // }
-  
+ 
     const uploadDetails: uploadedData = {
       majorHead: this.selectedMajorHead,
       minorHead: this.selectedMinorHead,
@@ -142,5 +109,7 @@ export class FileUploadComponent {
   
     // Store the updated form data in localStorage
     localStorage.setItem('fileMetadata', JSON.stringify(this.uploadedData));
+    alert('File uploaded successfully!');  
   }
+
 }

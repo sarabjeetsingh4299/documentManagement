@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { UsersDetails } from '../logindetail';
 import { NgForm } from '@angular/forms';
-
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',

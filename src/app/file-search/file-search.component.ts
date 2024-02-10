@@ -60,16 +60,12 @@ export class FileSearchComponent  implements OnInit{
       this.filteredData = this.uploadedData;
       return;
     }
-  
     
     this.filteredData = this.uploadedData.filter(data =>
       data.tags.includes(this.searchQuery) &&
        data.minorHead === this.selectedMinorHead
     );
-  
     
-    console.log(this.uploadedData);
-    console.log(this.filteredData);
   }
   
   previewFile(fileObj: any) {
@@ -81,10 +77,10 @@ export class FileSearchComponent  implements OnInit{
           // Write the PDF content to the new window
           newWindow.document.write(`<iframe width="100%" height="100%" src="${fileObj.content}"></iframe>`);
         } else {
-          console.error('Failed to open new window.');
+          alert('Failed to open new window.');
         }
       } else {
-        console.error('No or invalid PDF file selected.');
+        alert('No or invalid PDF file selected.');
         return;
       }
   }
@@ -105,7 +101,7 @@ downloadFile(fileObj: any) {
       // Clean up
       document.body.removeChild(link);
     } else {
-      console.error('No or invalid PDF file selected.');
+      alert('No or invalid PDF file selected.');
     }
   }
 }

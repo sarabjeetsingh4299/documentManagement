@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto"> <!-- Align items to the right -->
       <li class="nav-item">
-        <a class="nav-link" routerLink="/fileUpload"  routerLinkActive="active">File Upload</a>
+        <a class="nav-link" routerLink="/fileUpload" routerLinkActive="active">File Upload</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/fileSearch" >File Search</a>
+        <a class="nav-link" routerLink="/fileSearch"  >File Search</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="">Logout</a>
@@ -25,6 +25,7 @@
 <div class="row justify-content-center">
 <div class="col-md-12 mt-5">
 <form (ngSubmit)="uploadFile($event)" #fileUploadForm="ngForm">
+  <h2 class="bg-primary text-white p-2">Create User</h2>
     <div class="form-group">
       <label for="majorHead">User Type</label>
       <select id="majorHead" name="majorHead" [(ngModel)]="selectedMajorHead" (change)="setMinorHeadOptions()" class="form-control">
@@ -46,7 +47,7 @@
       </div>
     </div>
     <div class="form-group">
-      <input type="file" id="file" name="file" (change)="onFileSelected($event)" class="form-control-file">
+      <input type="file" id="file" name="file" (change)="onFileSelected($event)" class="form-control-file" required>
       
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="fileUploadForm.invalid">Upload</button>
